@@ -67,5 +67,5 @@ public class DriverController {
     @ResponseBody
     public String deleteDriver(@PathVariable String id) throws IOException {
         driverService.delete(id);
-        return "Deleted"
+        return "Deleted";
     }

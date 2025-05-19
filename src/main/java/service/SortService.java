@@ -9,5 +9,5 @@ public class SortService {
         int n=d.size();
         for(int i=0;i<n-1;i++) for(int j=0;j<n-i-1;j++)
             if(d.get(j).getRating()<d.get(j+1).getRating()) Collections.swap(d,j,j+1);
-    }
+    
 }

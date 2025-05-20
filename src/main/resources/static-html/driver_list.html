@@ -1,14 +1,83 @@
 <!DOCTYPE html>
-<html><head><title>Drivers</title></head><body>
-<h2>Drivers Sorted by Rating</h2>
-<table id="drivers"></table>
-<script>
-fetch('/api/drivers')
-  .then(res => res.json())
-  .then(data => {
-    const t = document.getElementById('drivers');
-    t.innerHTML = '<tr><th>ID</th><th>Name</th><th>Vehicle</th><th>Rating</th></tr>' +
-      data.map(d => `<tr><td>${d.id}</td><td>${d.name}</td><td>${d.vehicle}</td><td>${d.rating}</td></tr>`).join('');
-  });
-</script>
-</body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Drivers</title>
+    <link rel="stylesheet" href="/static/css/style.css"> <!-- Link your CSS here -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .available {
+            color: white;
+            background-color: #28a745;
+            padding: 4px 8px;
+            border-radius: 10px;
+        }
+
+        .unavailable {
+            color: white;
+            background-color: #dc3545;
+            padding: 4px 8px;
+            border-radius: 10px;
+        }
+
+        .rating-star {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manage Drivers</h1>
+    <a href="/add-driver" style="margin-bottom: 20px; display: inline-block;">
+        <button>Add New Driver</button>
+    </a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Vehicle</th>
+                <th>License Plate</th>
+                <th>Rating</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- This block will be populated from the controller using Thymeleaf -->
+            <!-- Example:
+            <tr th:each="driver : ${drivers}">
+                <td th:text="${driver.name}"></td>
+                ...
+            </tr>
+            -->
+            <tr th:each="driver : ${drivers}">
+                <td th:text="${driver.name}">John Smith</td>
+                <td th:text="${driver.contact}">555-1234</td>
+                <td th:text="${driver.vehicle}">Toyota Camry</td>
+                <td th:text="${driver.licensePlate}">DRV-001</td>
+                <td>
+                    <span class="rating-star">&#9733;</span>
+                    <span th:text="${driver.rating}">4.8</span>
+                </td>
+                <td>
+                    <span th:classappend="${driver.availability == 'Available'} ? 'available' : 'unavailable'"
+                          th:text="${driver.availability}">Available</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -31,7 +31,8 @@ public class DriverService {
     public void update(Driver updatedDriver) throws IOException {
         List<Driver> drivers = findAll();
         try (PrintWriter pw = new PrintWriter(new FileWriter(FILE))) {
-            for (Driver d : drivers) {
+            for (int i = 0; i < drivers.size(); i++) {
+                Driver d = drivers.get(i);
                 if (d.getId().equals(updatedDriver.getId())) {
                     pw.println(updatedDriver.getId() + "," + updatedDriver.getName() + "," + updatedDriver.getVehicle() + "," + updatedDriver.getRating());
                 } else {
@@ -44,7 +45,8 @@ public class DriverService {
     public void delete(String id) throws IOException {
         List<Driver> drivers = findAll();
         try (PrintWriter pw = new PrintWriter(new FileWriter(FILE))) {
-            for (Driver d : drivers) {
+            for (int i = 0; i < drivers.size(); i++) {
+                Driver d = drivers.get(i);
                 if (!d.getId().equals(id)) {
                     pw.println(d.getId() + "," + d.getName() + "," + d.getVehicle() + "," + d.getRating());
                 }

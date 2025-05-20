@@ -31,7 +31,7 @@ public class Driver {
         return rating;
     }
 
-    // Setters
+   
     public void setId(String id) {
         this.id = id;
     }
